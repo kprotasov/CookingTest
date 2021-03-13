@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/little_offset"
+    android:background="@color/colorBlack">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/imageViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <LinearLayout
+        android:id="@+id/imagesCountContainer"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:background="@drawable/image_count_background"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/itemCountTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/image_count_placeholder"
+            android:textColor="@color/colorBlack"
+            tools:text="1/10"/>
+
+    </LinearLayout>
+
+</FrameLayout>

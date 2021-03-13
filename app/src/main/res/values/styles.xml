@@ -1,0 +1,31 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColor">@color/textColor</item>
+        <item name="radioButtonStyle">@style/RadioButtonStyle</item>
+        <item name="editTextStyle">@style/EditTextStyle</item>
+    </style>
+
+    <dimen name="download_button_size">48dp</dimen>
+    <dimen name="default_offset">16dp</dimen>
+    <dimen name="half_offset">8dp</dimen>
+    <dimen name="little_offset">4dp</dimen>
+
+    <dimen name="image_height">200dp</dimen>
+
+    <style name="RadioButtonStyle" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:buttonTint">@color/textColor</item>
+    </style>
+
+    <style name="EditTextStyle" parent="Widget.AppCompat.EditText">
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textColorHint">#7E7E7E</item>
+    </style>
+
+</resources>

@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Рецепты</string>
+    <string name="title_data">Data</string>
+    <string name="sorting_title">Сортировка:</string>
+    <string name="without_sorting">Нет</string>
+    <string name="sorting_by_name">По имени</string>
+    <string name="sorting_by_date">Сначала новые</string>
+    <string name="search_hint">Поиск</string>
+    <string name="difficulty_placeholder">Сложность: %s</string>
+    <string name="image_count_placeholder">%s/%s</string>
+
+    <string-array
+        name="difficulty_names">
+        <item>Очень легко</item>
+        <item>Легко</item>
+        <item>Средне</item>
+        <item>Сложно</item>
+        <item>Очень сложно</item>
+        <item>Невозможно</item>
+    </string-array>
+
+</resources>
