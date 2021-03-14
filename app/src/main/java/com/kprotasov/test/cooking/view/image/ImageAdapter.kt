@@ -38,7 +38,10 @@ class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
     class ImageViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
         fun bind(imageLink: String, onImageClickListener: OnImageClickListener?) {
-            Picasso.get().load(imageLink).into(view.imageView)
+            Picasso.get()
+                .load(imageLink)
+                .placeholder(R.drawable.image_placeholder)
+                .into(view.imageView)
 
             view.setOnClickListener{
                 onImageClickListener?.onImageClicked(imageLink)

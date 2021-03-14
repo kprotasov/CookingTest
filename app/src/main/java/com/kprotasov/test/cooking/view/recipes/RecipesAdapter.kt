@@ -43,7 +43,10 @@ class RecipesViewHolder(private val view: View) : RecyclerView.ViewHolder(view) 
 
     fun bind(recipe: Recipe, onRecipeItemClickListener: OnRecipeItemClickListener?) {
         view.recipeTitle.text = recipe.name
-        Picasso.get().load(recipe.images.first()).into(view.recipeImage)
+        Picasso.get()
+            .load(recipe.images.first())
+            .placeholder(R.drawable.image_placeholder)
+            .into(view.recipeImage)
 
         val difficultyNames = view.context.resources.getStringArray(R.array.difficulty_names)
         val difficultyText: String = if (recipe.difficulty <= difficultyNames.size) {

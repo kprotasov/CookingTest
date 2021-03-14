@@ -36,22 +36,15 @@
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/withoutSortingRadioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/without_sorting"/>
-
-            <RadioButton
                 android:id="@+id/sortByNameRadioButton"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/sorting_by_name"/>
 
             <RadioButton
                 android:id="@+id/sortByDateRadioButton"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/sorting_by_date"/>

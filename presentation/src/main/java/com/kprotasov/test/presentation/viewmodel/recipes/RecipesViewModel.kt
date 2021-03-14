@@ -22,7 +22,8 @@ class RecipesViewModel @Inject constructor(
     val state: LiveData<RecipesState> = _state
 
     private var defaultRecipesList = emptyList<Recipe>()
-    private var currentSorting = RecipesSortingType.WITHOUT_SORTING
+    private var filterPhrase: String? = null
+    private var currentSorting: RecipesSortingType? = null
 
     init {
         sortingIndex.observeForever(::changeSorting)
@@ -37,10 +38,15 @@ class RecipesViewModel @Inject constructor(
                 .subscribe(
                     {
                         defaultRecipesList = it
-                        _state.value =
-                            RecipesState.Recipes(
-                                defaultRecipesList
-                            )
+
+                        if (!filterPhrase.isNullOrEmpty()) {
+                            filter(filterPhrase!!)
+                        } else {
+                            _state.value =
+                                RecipesState.Recipes(
+                                    sorting(currentSorting, defaultRecipesList)
+                                )
+                        }
                     },
                     {
                         _state.value =
@@ -63,11 +69,13 @@ class RecipesViewModel @Inject constructor(
         _state.value = RecipesState.Recipes(sorting(sortingType, recipes.recipesList))
     }
 
-    private fun sorting(sortingType: RecipesSortingType, recipesList: List<Recipe>): List<Recipe> {
+    private fun sorting(sortingType: RecipesSortingType?, recipesList: List<Recipe>): List<Recipe> {
+        if (sortingType == null) {
+            return recipesList
+        }
         return when (sortingType) {
             RecipesSortingType.SORTING_BY_NAME -> sortByName(recipesList)
             RecipesSortingType.SORTING_BY_DATE -> sortByDate(recipesList)
-            RecipesSortingType.WITHOUT_SORTING -> recipesList
         }
     }
 
@@ -83,9 +91,16 @@ class RecipesViewModel @Inject constructor(
         }
 
         if (filterPhrase.isEmpty()) {
+            this.filterPhrase = null
             _state.value = RecipesState.Recipes(defaultRecipesList)
         }
 
+        this.filterPhrase = filterPhrase
+
+        filter(filterPhrase)
+    }
+
+    private fun filter(filterPhrase: String) {
         Single.fromCallable {
             defaultRecipesList.filter {
                 it.name.contains(filterPhrase, true) ||
@@ -96,7 +111,7 @@ class RecipesViewModel @Inject constructor(
             .subscribe(
                 {
                     _state.value =
-                        RecipesState.Recipes(it)
+                        RecipesState.Recipes(sorting(currentSorting, it))
                 },
                 {
                     _state.value =

@@ -1,10 +1,13 @@
 package com.kprotasov.test.cooking.view.image
 
+import android.app.DownloadManager
+import android.content.Context
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.kprotasov.test.cooking.R
-import com.kprotasov.test.cooking.service.DownloadService
 import com.kprotasov.test.cooking.ui.extensions.args
 import com.kprotasov.test.cooking.ui.fragment.BaseFragment
 import com.squareup.picasso.Picasso
@@ -35,16 +38,34 @@ class ImageFragment : BaseFragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         downloadButton.setOnClickListener(this)
-        Picasso.get().load(args.imageUrl).into(imageView)
+        Picasso.get()
+            .load(args.imageUrl)
+            .placeholder(R.drawable.image_placeholder)
+            .into(imageView)
     }
 
     override fun onClick(v: View) {
-        activity?.startService(
-            DownloadService.getDownloadService(
-                context!!,
-                args.imageUrl
-            )
+        downloadImage(args.imageUrl)
+    }
+
+    private fun downloadImage(imageUrl: String) {
+        val downloadDirectory = context?.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
+        downloadDirectory?.mkdir()
+
+        val uri = Uri.parse(imageUrl)
+        val request = DownloadManager.Request(uri)
+
+        request.setAllowedNetworkTypes(
+            DownloadManager.Request.NETWORK_MOBILE or DownloadManager.Request.NETWORK_WIFI
         )
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+        request.setTitle("Downloading recipe image")
+        request.setDestinationInExternalPublicDir(
+            Environment.DIRECTORY_DOWNLOADS,
+            uri.getLastPathSegment()
+        )
+
+        (context?.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager).enqueue(request)
     }
 
 }
