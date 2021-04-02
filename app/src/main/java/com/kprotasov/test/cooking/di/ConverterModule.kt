@@ -2,7 +2,7 @@ package com.kprotasov.test.newsreadertest.di
 
 import com.kprotasov.test.data.converters.Converter
 import com.kprotasov.test.data.converters.DateConverter
-import com.kprotasov.test.data.converters.RecipeListConverter
+import com.kprotasov.test.data.converters.RecipeConverter
 import com.kprotasov.test.data.model.RecipeModel
 import com.kprotasov.test.domain.entity.Recipe
 import dagger.Module
@@ -17,7 +17,7 @@ class ConverterModule {
         DateConverter()
 
     @Provides
-    fun provideRecipeListConverter(dateConverter: Converter<Long, Date>): Converter<RecipeModel, Recipe> =
-        RecipeListConverter(dateConverter)
+    fun provideRecipeConverter(dateConverter: Converter<Long, Date>): Converter<RecipeModel, Recipe> =
+        RecipeConverter(dateConverter)
 
 }

@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,7 +13,6 @@ import com.kprotasov.test.cooking.R
 import com.kprotasov.test.cooking.ui.extensions.hideKeyboard
 import com.kprotasov.test.cooking.ui.mvvm.MvvmFragment
 import com.kprotasov.test.cooking.ui.mvvm.delegates.viewModels
-import com.kprotasov.test.cooking.ui.mvvm.lifecycle.bind
 import com.kprotasov.test.cooking.ui.mvvm.lifecycle.subscribeSafe
 import com.kprotasov.test.domain.entity.Recipe
 import com.kprotasov.test.presentation.viewmodel.recipes.RecipesState
@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.recipes_fragment.*
 import javax.inject.Inject
 
 class RecipesFragment : MvvmFragment(),
-    OnRecipeItemClickListener, TextView.OnEditorActionListener {
+    OnRecipeItemClickListener, TextView.OnEditorActionListener, RadioGroup.OnCheckedChangeListener {
 
     companion object {
         fun newInstance(): Fragment = RecipesFragment()
@@ -33,12 +33,6 @@ class RecipesFragment : MvvmFragment(),
     @Inject
     lateinit var adapter: RecipesAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        retainInstance = false
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -47,13 +41,13 @@ class RecipesFragment : MvvmFragment(),
         recipesList.layoutManager = LinearLayoutManager(context)
 
         viewModel.state.subscribeSafe(viewLifecycleOwner, ::updateState)
-        viewModel.sortingIndex.bind(viewLifecycleOwner, radioGroup)
 
         viewModel.loadRecipes()
 
         changeRadioGroupIds()
 
         searchEditText.setOnEditorActionListener(this)
+        radioGroup.setOnCheckedChangeListener(this)
     }
 
     private fun changeRadioGroupIds() {
@@ -80,6 +74,10 @@ class RecipesFragment : MvvmFragment(),
         return false
     }
 
+    override fun onCheckedChanged(group: RadioGroup?, checkedId: Int) {
+        viewModel.changeSorting(checkedId)
+    }
+
     private fun updateState(state: RecipesState) {
         when (state) {
             RecipesState.InProgress -> renderInProgressState()
@@ -89,7 +87,8 @@ class RecipesFragment : MvvmFragment(),
     }
 
     private fun renderInProgressState() {
-        // code to show progress
+        containerLayout.visibility = View.GONE
+        progressBar.visibility = View.VISIBLE
     }
 
     private fun renderErrorState(state: RecipesState.Error) {
@@ -97,6 +96,9 @@ class RecipesFragment : MvvmFragment(),
     }
 
     private fun renderRecipesFullListState(state: RecipesState.Recipes) {
+        containerLayout.visibility = View.VISIBLE
+        progressBar.visibility = View.GONE
+
         adapter.setRecipesList(state.recipesList)
     }
 

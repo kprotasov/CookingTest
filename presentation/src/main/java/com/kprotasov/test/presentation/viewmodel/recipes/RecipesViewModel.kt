@@ -16,18 +16,12 @@ class RecipesViewModel @Inject constructor(
     private val router: Router
 ) : BaseViewModel() {
 
-    val sortingIndex: MutableLiveData<Int> = MutableLiveData()
-
     private val _state = MutableLiveData<RecipesState>()
     val state: LiveData<RecipesState> = _state
 
     private var defaultRecipesList = emptyList<Recipe>()
     private var filterPhrase: String? = null
     private var currentSorting: RecipesSortingType? = null
-
-    init {
-        sortingIndex.observeForever(::changeSorting)
-    }
 
     fun loadRecipes() {
         if (_state.value != RecipesState.InProgress) {
@@ -40,7 +34,7 @@ class RecipesViewModel @Inject constructor(
                         defaultRecipesList = it
 
                         if (!filterPhrase.isNullOrEmpty()) {
-                            filter(filterPhrase!!)
+                            filter(filterPhrase)
                         } else {
                             _state.value =
                                 RecipesState.Recipes(
@@ -57,7 +51,7 @@ class RecipesViewModel @Inject constructor(
         }
     }
 
-    private fun changeSorting(checkedIndex: Int) {
+    fun changeSorting(checkedIndex: Int) {
         val sortingTypes = RecipesSortingType.values()
         val sortingType = sortingTypes[checkedIndex]
 
@@ -100,7 +94,8 @@ class RecipesViewModel @Inject constructor(
         filter(filterPhrase)
     }
 
-    private fun filter(filterPhrase: String) {
+    private fun filter(filterPhrase: String?) {
+        if (filterPhrase.isNullOrEmpty()) return
         Single.fromCallable {
             defaultRecipesList.filter {
                 it.name.contains(filterPhrase, true) ||
@@ -122,7 +117,7 @@ class RecipesViewModel @Inject constructor(
     }
 
     fun openDetails(recipe: Recipe) {
-        router.moveTo(RECIPE_DETAILS_SCREEN, recipe)
+        router.moveTo(RECIPE_DETAILS_SCREEN, recipe.uuid)
     }
 
 }

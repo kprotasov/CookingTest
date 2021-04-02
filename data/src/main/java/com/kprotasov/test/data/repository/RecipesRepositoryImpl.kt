@@ -9,7 +9,7 @@ import io.reactivex.Single
 import javax.inject.Inject
 
 class RecipesRepositoryImpl @Inject constructor(
-    private val recipeListConverter: Converter<RecipeModel, Recipe>,
+    private val recipeConverter: Converter<RecipeModel, Recipe>,
     private val recipesDataSource: RecipesDataSource
 ) : RecipesRepository {
 
@@ -17,6 +17,6 @@ class RecipesRepositoryImpl @Inject constructor(
         recipesDataSource.getRecipes()
             .map {
                 val recipeModelList = it.recipes
-                recipeModelList.map { recipeListConverter.convert(it) }
+                recipeModelList.map { recipeConverter.convert(it) }
             }
 }

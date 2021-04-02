@@ -4,10 +4,9 @@ import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import com.kprotasov.test.cooking.view.image.ImageFragment
+import com.kprotasov.test.cooking.view.image.RecipeImageFragment
 import com.kprotasov.test.cooking.view.details.RecipeDetailsFragment
 import com.kprotasov.test.cooking.view.recipes.RecipesFragment
-import com.kprotasov.test.domain.entity.Recipe
 import com.kprotasov.test.presentation.navigation.*
 import javax.inject.Inject
 
@@ -50,8 +49,8 @@ class MainRouter @Inject constructor() : Router, Navigator {
     private fun getFragment(screen: String, data: Any?): Fragment =
         when (screen) {
             RECIPES_SCREEN -> RecipesFragment.newInstance()
-            RECIPE_DETAILS_SCREEN -> RecipeDetailsFragment.newInstance(data as Recipe)
-            IMAGE_SCREEN -> ImageFragment.newInstance(data as String)
+            RECIPE_DETAILS_SCREEN -> RecipeDetailsFragment.newInstance(data as String)
+            IMAGE_SCREEN -> RecipeImageFragment.newInstance(data as String)
             else -> throw Throwable("Attempt to move to non-existent screen - ($screen)")
         }
 

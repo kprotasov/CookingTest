@@ -4,8 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.kprotasov.test.cooking.ui.extensions.args
 import com.kprotasov.test.cooking.ui.mvvm.di.ViewModelKey
 import com.kprotasov.test.cooking.view.details.RecipeDetailsFragment
-import com.kprotasov.test.cooking.view.details.recipe
-import com.kprotasov.test.domain.entity.Recipe
+import com.kprotasov.test.cooking.view.details.recipeUuid
 import com.kprotasov.test.presentation.viewmodel.details.RecipeDetailsViewModel
 import dagger.Binds
 import dagger.Module
@@ -16,12 +15,12 @@ import dagger.multibindings.IntoMap
 @Module
 interface RecipeDetailsPresentationModule {
 
-    @Module
+    //@Module
     companion object {
 
         @Provides
-        fun provideRecipesList(recipesDetailsFragment: RecipeDetailsFragment): Recipe =
-            recipesDetailsFragment.args.recipe
+        fun provideRecipeUuid(recipesDetailsFragment: RecipeDetailsFragment): String =
+            recipesDetailsFragment.args.recipeUuid
 
     }
 

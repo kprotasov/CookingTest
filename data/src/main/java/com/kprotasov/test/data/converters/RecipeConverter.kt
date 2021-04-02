@@ -5,7 +5,7 @@ import com.kprotasov.test.domain.entity.Recipe
 import java.util.*
 import javax.inject.Inject
 
-class RecipeListConverter @Inject constructor(
+class RecipeConverter @Inject constructor(
     private val dateConverter: Converter<Long, Date>
 ) : Converter<RecipeModel, Recipe> {
 
