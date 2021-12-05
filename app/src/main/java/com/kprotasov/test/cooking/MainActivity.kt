@@ -2,9 +2,11 @@ package com.kprotasov.test.cooking
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.kprotasov.test.presentation.navigation.Navigator
-import com.kprotasov.test.presentation.navigation.RECIPES_SCREEN
-import com.kprotasov.test.presentation.navigation.Router
+import com.github.terrakok.cicerone.Navigator
+import com.github.terrakok.cicerone.NavigatorHolder
+import com.github.terrakok.cicerone.androidx.AppNavigator
+import com.kprotasov.test.presentation.navigation.GlobalRouter
+import com.kprotasov.test.presentation.navigation.Screens
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -14,10 +16,15 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity(), HasAndroidInjector {
 
     @Inject
-    lateinit var navigator: Navigator
+    lateinit var router: GlobalRouter
 
     @Inject
-    lateinit var router: Router
+    lateinit var navigatorHolder: NavigatorHolder
+
+    @Inject
+    lateinit var screens: Screens
+
+    private val navigator: Navigator = AppNavigator(this, R.id.container)
 
     @Inject
     lateinit var androidInjector: DispatchingAndroidInjector<Any>
@@ -30,18 +37,16 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
 
-        navigator.setContainer(R.id.container)
+        router.newRootScreen(screens.recipesScreen())
     }
 
-    override fun onStart() {
-        super.onStart()
-        navigator.attach(supportFragmentManager)
-        router.moveTo(RECIPES_SCREEN)
+    override fun onResume() {
+        super.onResume()
+        navigatorHolder.setNavigator(navigator)
     }
 
-    override fun onStop() {
-        navigator.detach()
-        super.onStop()
+    override fun onPause() {
+        navigatorHolder.removeNavigator()
+        super.onPause()
     }
-
 }

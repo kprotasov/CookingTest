@@ -1,4 +1,4 @@
-package com.kprotasov.test.newsreadertest.di
+package com.kprotasov.test.cooking.di
 
 import com.kprotasov.test.data.converters.Converter
 import com.kprotasov.test.data.converters.DateConverter
@@ -19,5 +19,4 @@ class ConverterModule {
     @Provides
     fun provideRecipeConverter(dateConverter: Converter<Long, Date>): Converter<RecipeModel, Recipe> =
         RecipeConverter(dateConverter)
-
 }

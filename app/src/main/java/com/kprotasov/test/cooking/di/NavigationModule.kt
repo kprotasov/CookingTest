@@ -1,31 +1,28 @@
 package com.kprotasov.test.cooking.di
 
-import com.kprotasov.test.cooking.navigation.MainRouter
-import com.kprotasov.test.presentation.navigation.Navigator
-import com.kprotasov.test.presentation.navigation.Router
-import dagger.Binds
+import com.github.terrakok.cicerone.Cicerone
+import com.kprotasov.test.cooking.navigation.ScreensImpl
+import com.kprotasov.test.presentation.navigation.GlobalRouter
+import com.kprotasov.test.presentation.navigation.Screens
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-interface NavigationModule {
+class NavigationModule {
 
-    @Module
-    companion object {
+    private val cicerone: Cicerone<GlobalRouter> = Cicerone.create(GlobalRouter())
 
-        @JvmStatic
-        @Provides
-        @Singleton
-        fun providesMainRouter(): MainRouter = MainRouter()
-    }
-
-    @Binds
+    @Provides
     @Singleton
-    fun bindRouter(router: MainRouter): Router
+    fun provideGlobalRouter(): GlobalRouter = cicerone.router
 
-    @Binds
+    @Provides
     @Singleton
-    fun bindNavigator(router: MainRouter): Navigator
+    fun provideGlobalNavigatorHolder() = cicerone.getNavigatorHolder()
 
+    @Provides
+    @Singleton
+    fun provideNewScreens(): Screens = ScreensImpl()
 }
+

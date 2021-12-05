@@ -5,15 +5,16 @@ import androidx.lifecycle.MutableLiveData
 import com.kprotasov.test.domain.entity.Recipe
 import com.kprotasov.test.domain.interactor.RecipesInteractor
 import com.kprotasov.test.presentation.BaseViewModel
-import com.kprotasov.test.presentation.navigation.RECIPE_DETAILS_SCREEN
-import com.kprotasov.test.presentation.navigation.Router
+import com.kprotasov.test.presentation.navigation.GlobalRouter
+import com.kprotasov.test.presentation.navigation.Screens
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
 class RecipesViewModel @Inject constructor(
     private val recipeInteractor: RecipesInteractor,
-    private val router: Router
+    private val router: GlobalRouter,
+    private val screens: Screens
 ) : BaseViewModel() {
 
     private val _state = MutableLiveData<RecipesState>()
@@ -117,7 +118,7 @@ class RecipesViewModel @Inject constructor(
     }
 
     fun openDetails(recipe: Recipe) {
-        router.moveTo(RECIPE_DETAILS_SCREEN, recipe.uuid)
+        router.navigateTo(screens.recipeDetailsScreen(recipe.uuid))
     }
 
 }

@@ -11,5 +11,4 @@ class ApiModule {
     @Provides
     fun provideRecipesApi(api: Api): RecipesApi =
         api.getRecipesApi()
-
 }

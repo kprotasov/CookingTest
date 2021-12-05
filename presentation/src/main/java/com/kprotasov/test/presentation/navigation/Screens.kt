@@ -1,5 +1,12 @@
 package com.kprotasov.test.presentation.navigation
 
-const val RECIPES_SCREEN = "RECIPES_SCREEN"
-const val RECIPE_DETAILS_SCREEN = "RECIPE_DETAILS_SCREEN"
-const val IMAGE_SCREEN = "IMAGE_SCREEN"
+import com.github.terrakok.cicerone.androidx.FragmentScreen
+
+interface Screens {
+
+    fun recipesScreen(): FragmentScreen
+
+    fun recipeDetailsScreen(recipeUuid: String): FragmentScreen
+
+    fun recipeImageScreen(imageUrl: String): FragmentScreen
+}

@@ -15,13 +15,11 @@ import dagger.multibindings.IntoMap
 @Module
 interface RecipeDetailsPresentationModule {
 
-    //@Module
     companion object {
 
         @Provides
         fun provideRecipeUuid(recipesDetailsFragment: RecipeDetailsFragment): String =
             recipesDetailsFragment.args.recipeUuid
-
     }
 
     @Binds

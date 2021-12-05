@@ -1,20 +1,25 @@
-package com.kprotasov.test.newsreadertest.di
+package com.kprotasov.test.cooking.di
 
-import android.content.Context
 import com.kprotasov.test.cooking.App
-import dagger.BindsInstance
 import dagger.Component
-import dagger.android.AndroidInjector
+import dagger.android.AndroidInjectionModule
+import dagger.android.support.AndroidSupportInjectionModule
+import javax.inject.Singleton
 
-@Component(modules = [AppModule::class])
-interface AppComponent : AndroidInjector<App> {
+@Singleton
+@Component(
+    modules = [
+        ActivityModule::class,
+        AppModule::class,
+        AndroidSupportInjectionModule::class,
+        RepositoriesModule::class,
+        ConverterModule::class,
+        AndroidInjectionModule::class,
+        ApiModule::class,
+        NavigationModule::class
+    ]
+)
+interface AppComponent {
 
-    @Component.Builder
-    abstract class Builder : AndroidInjector.Builder<App>() {
-
-        @BindsInstance
-        abstract fun context(context: Context): Builder
-
-    }
-
+    fun inject(application: App)
 }

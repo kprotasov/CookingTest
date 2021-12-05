@@ -16,7 +16,6 @@ interface RecipesPresentationModule {
     @IntoMap
     @ViewModelKey(RecipesViewModel::class)
     fun bindViewModel(viewModel: RecipesViewModel): ViewModel
-
 }
 
 @Module
@@ -26,5 +25,4 @@ interface RecipesModule {
         RecipesPresentationModule::class
     ])
     fun provideRecipesFragment(): RecipesFragment
-
 }

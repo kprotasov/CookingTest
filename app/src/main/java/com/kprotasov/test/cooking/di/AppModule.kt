@@ -1,25 +1,14 @@
-package com.kprotasov.test.newsreadertest.di
+package com.kprotasov.test.cooking.di
 
-import com.kprotasov.test.cooking.MainActivity
-import com.kprotasov.test.cooking.di.*
+import android.content.Context
 import dagger.Module
-import dagger.android.AndroidInjectionModule
-import dagger.android.ContributesAndroidInjector
-import dagger.android.support.AndroidSupportInjectionModule
+import dagger.Provides
 import javax.inject.Singleton
 
-@Module(includes = [
-    AndroidSupportInjectionModule::class,
-    RepositoriesModule::class,
-    ConverterModule::class,
-    AndroidInjectionModule::class,
-    RecipeImageModule::class,
-    ApiModule::class
-])
-interface AppModule {
+@Module
+class AppModule(private val context: Context) {
 
+    @Provides
     @Singleton
-    @ContributesAndroidInjector(modules = [NavigationModule::class, RecipesModule::class, RecipeDetailsModule::class])
-    fun provideMainActivity(): MainActivity
-
+    fun provideContext() = context
 }
