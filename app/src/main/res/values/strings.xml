@@ -19,4 +19,6 @@
         <item>Невозможно</item>
     </string-array>
 
+    <integer name="com_vk_sdk_AppId">7014826</integer>
+
 </resources>
