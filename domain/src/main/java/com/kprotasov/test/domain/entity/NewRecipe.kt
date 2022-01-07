@@ -9,7 +9,7 @@ data class NewRecipe(
     val text: String? = null,
     val replyOwnerId: Int? = null,
     val replyPostId: Int? = null,
-    val friendsOnly: Int? = null,
+    val friendsOnly: Boolean = false,
     val comments: Comments? = null,
     val copyright: Copyright? = null,
     val likes: Likes? = null,
