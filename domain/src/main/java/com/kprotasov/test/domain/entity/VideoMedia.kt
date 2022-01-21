@@ -16,4 +16,4 @@ data class VideoMedia(
     val comments: Int,
     val canComment: Boolean,
     val canLike: Boolean
-): BaseMedia()
+): BaseMedia(MediaTypes.TYPE_VIDEO)

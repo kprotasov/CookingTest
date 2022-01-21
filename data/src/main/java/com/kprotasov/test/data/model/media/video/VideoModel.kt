@@ -1,8 +1,6 @@
 package com.kprotasov.test.data.model.media.video
 
 import com.google.gson.annotations.SerializedName
-import com.kprotasov.test.data.model.media.BaseMediaModel
-import com.kprotasov.test.data.model.media.MediaTypes
 
 data class VideoModel(
     val id: Int,
@@ -18,4 +16,4 @@ data class VideoModel(
     val comments: Int,
     @SerializedName("can_comment") val canComment: Int,
     @SerializedName("can_like") val canLike: Int
-): BaseMediaModel(MediaTypes.TYPE_VIDEO)
+)

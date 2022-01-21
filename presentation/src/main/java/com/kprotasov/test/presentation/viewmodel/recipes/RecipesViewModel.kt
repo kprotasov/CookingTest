@@ -1,18 +1,22 @@
 package com.kprotasov.test.presentation.viewmodel.recipes
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.kprotasov.test.domain.entity.Recipe
+import com.kprotasov.test.domain.interactor.NewRecipeInteractor
 import com.kprotasov.test.domain.interactor.RecipesInteractor
 import com.kprotasov.test.presentation.BaseViewModel
 import com.kprotasov.test.presentation.navigation.GlobalRouter
 import com.kprotasov.test.presentation.navigation.Screens
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class RecipesViewModel @Inject constructor(
     private val recipeInteractor: RecipesInteractor,
+    private val newRecipeInteractor: NewRecipeInteractor,
     private val router: GlobalRouter,
     private val screens: Screens
 ) : BaseViewModel() {
@@ -28,7 +32,22 @@ class RecipesViewModel @Inject constructor(
         if (_state.value != RecipesState.InProgress) {
             _state.value = RecipesState.InProgress
 
-            recipeInteractor.getRecipes()
+            newRecipeInteractor.getWallById("18464856", 0, 3)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    {
+                        _state.value =
+                            RecipesState.Recipes(it)
+                    },
+                    {
+                        _state.value =
+                            RecipesState.Error(it.localizedMessage)
+                    }
+                )
+                .addToDisposable()
+
+                /*recipeInteractor.getRecipes()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                     {
@@ -48,11 +67,11 @@ class RecipesViewModel @Inject constructor(
                             RecipesState.Error(it.localizedMessage)
                     }
                 )
-                .addToDisposable()
+                .addToDisposable()*/
         }
     }
 
-    fun changeSorting(checkedIndex: Int) {
+    /*fun changeSorting(checkedIndex: Int) {
         val sortingTypes = RecipesSortingType.values()
         val sortingType = sortingTypes[checkedIndex]
 
@@ -115,7 +134,7 @@ class RecipesViewModel @Inject constructor(
                 }
             )
             .addToDisposable()
-    }
+    }*/
 
     fun openDetails(recipe: Recipe) {
         router.navigateTo(screens.recipeDetailsScreen(recipe.uuid))

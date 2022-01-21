@@ -1,8 +1,6 @@
 package com.kprotasov.test.data.model.media.audio
 
 import com.google.gson.annotations.SerializedName
-import com.kprotasov.test.data.model.media.BaseMediaModel
-import com.kprotasov.test.data.model.media.MediaTypes
 
 /*
 id
@@ -38,4 +36,4 @@ data class AudioModel(
     val duration: Int,
     val url: String,
     val date: Int
-) : BaseMediaModel(MediaTypes.TYPE_AUDIO)
+)

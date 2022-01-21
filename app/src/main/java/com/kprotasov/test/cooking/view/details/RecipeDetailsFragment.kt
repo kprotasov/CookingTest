@@ -73,7 +73,7 @@ class RecipeDetailsFragment : MvvmFragment(),
         description.text = recipe.description
         instruction.text = recipe.instructions
 
-        recipeImage.setImages(recipe.images, this)
+        recipeMediaContainer.setImages(recipe.images, this)
     }
 
     override fun onImageClicked(imageLink: String) {

@@ -14,7 +14,7 @@ import com.google.gson.annotations.SerializedName
 data class CommentsModel(
     val count: Int,
     @SerializedName("can_post") val canPost: Int,
-    @SerializedName("groups_can_post") val groupsCanPost: Int? = null,
+    @SerializedName("groups_can_post") val groupsCanPost: Boolean = false,
     @SerializedName("can_close") val canClose: Boolean,
     @SerializedName("can_open") val canOpen: Boolean
 )

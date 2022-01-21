@@ -18,5 +18,5 @@ data class NewRecipe(
     val postType: String? = null,
     val attachments: List<BaseMedia>? = null,
     val makeAsAds: Int? = null,
-    val donut: Donut? = null
+    val isDonut: Boolean = false
 )

@@ -66,16 +66,16 @@ class RecipesFragment : MvvmFragment(),
     }
 
     override fun onEditorAction(view: TextView, actionId: Int, event: KeyEvent?): Boolean {
-        if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+        /*if (actionId == EditorInfo.IME_ACTION_SEARCH) {
             viewModel.filterRecipes(view.text.toString())
             view.hideKeyboard()
             return true
-        }
+        }*/
         return false
     }
 
     override fun onCheckedChanged(group: RadioGroup?, checkedId: Int) {
-        viewModel.changeSorting(checkedId)
+        //viewModel.changeSorting(checkedId)
     }
 
     private fun updateState(state: RecipesState) {

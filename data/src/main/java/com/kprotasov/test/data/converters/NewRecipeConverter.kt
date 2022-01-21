@@ -1,6 +1,7 @@
 package com.kprotasov.test.data.converters
 
 import com.kprotasov.test.data.model.NewRecipeModel
+import com.kprotasov.test.domain.entity.BaseMedia
 import com.kprotasov.test.domain.entity.NewRecipe
 import javax.inject.Inject
 
@@ -10,12 +11,14 @@ class NewRecipeConverter @Inject constructor(
     private val copyrightConverter: CopyrightConverter,
     private val likesConverter: LikesConverter,
     private val repostsConverter: RepostsConverter,
-    private val viewsConverter: ViewsConverter
+    private val viewsConverter: ViewsConverter,
+    private val attachmentConverter: AttachmentConverter,
+    private val donutConverter: DonutConverter
 ) : Converter<List<NewRecipeModel>, List<NewRecipe>> {
 
     override fun convert(from: List<NewRecipeModel>): List<NewRecipe> =
         from.map {
-
+            convertModelToEntity(it)
         }
 
     private fun convertModelToEntity(model: NewRecipeModel): NewRecipe {
@@ -35,9 +38,9 @@ class NewRecipeConverter @Inject constructor(
             reposts = repostsConverter.convert(model.reposts),
             views = viewsConverter.convert(model.views),
             postType = model.postType,
-            attachments =
+            attachments = model.attachments?.map { attachmentConverter.convert(it) },
+            makeAsAds = model.makeAsAds,
+            isDonut = donutConverter.convert(model.donut)
         )
     }
-
-
 }

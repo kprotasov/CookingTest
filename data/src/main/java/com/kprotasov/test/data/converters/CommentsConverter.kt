@@ -13,7 +13,7 @@ class CommentsConverter @Inject constructor(
             Comments(
                 count = model.count,
                 canPost = intToBooleanConverter.convert(model.canPost),
-                groupsCanPost = intToBooleanConverter.convert(model.groupsCanPost ?: 0),
+                groupsCanPost = model.groupsCanPost,
                 canClose = model.canClose,
                 canOpen = model.canOpen
             )

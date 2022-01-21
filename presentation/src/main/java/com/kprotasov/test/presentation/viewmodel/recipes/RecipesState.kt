@@ -1,6 +1,6 @@
 package com.kprotasov.test.presentation.viewmodel.recipes
 
-import com.kprotasov.test.domain.entity.Recipe
+import com.kprotasov.test.domain.entity.NewRecipe
 
 sealed class RecipesState  {
 
@@ -8,6 +8,6 @@ sealed class RecipesState  {
 
     data class Error(val message: String?) : RecipesState()
 
-    data class Recipes(val recipesList: List<Recipe>) : RecipesState()
+    data class Recipes(val recipesList: List<NewRecipe>) : RecipesState()
 
 }

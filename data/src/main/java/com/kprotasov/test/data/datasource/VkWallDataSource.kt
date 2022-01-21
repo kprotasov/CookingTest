@@ -1,5 +1,6 @@
 package com.kprotasov.test.data.datasource
 
+import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.kprotasov.test.data.model.NewRecipeModel
@@ -7,6 +8,7 @@ import com.vk.api.sdk.VK
 import com.vk.api.sdk.requests.VKRequest
 import io.reactivex.Observable
 import org.json.JSONObject
+import javax.inject.Inject
 
 
 /*
@@ -31,7 +33,7 @@ Observable.fromCallable {
         // throwable here
     })
  */
-class VkWallDataSource {
+class VkWallDataSource @Inject constructor(){
 
     companion object {
         const val GROUP_OWNER_ID = "-%s"
@@ -95,6 +97,7 @@ class VkWallRequest : VKRequest<List<NewRecipeModel>>("wall.get") {
         val items = response.getJSONArray(Fields.ITEMS)
         val typeWall = object : TypeToken<List<NewRecipeModel>>() {}.type
 
+        Log.v("WallDataSourceTest", items.toString())
         return gson.fromJson(items.toString(), typeWall)
     }
 }

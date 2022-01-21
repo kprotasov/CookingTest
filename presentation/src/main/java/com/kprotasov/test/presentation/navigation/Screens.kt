@@ -4,6 +4,8 @@ import com.github.terrakok.cicerone.androidx.FragmentScreen
 
 interface Screens {
 
+    fun authorizeScreen(): FragmentScreen
+
     fun recipesScreen(): FragmentScreen
 
     fun recipeDetailsScreen(recipeUuid: String): FragmentScreen

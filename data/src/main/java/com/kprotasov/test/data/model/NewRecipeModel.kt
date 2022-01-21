@@ -1,6 +1,7 @@
 package com.kprotasov.test.data.model
 
 import com.google.gson.annotations.SerializedName
+import com.kprotasov.test.data.model.media.BaseAttachmentModel
 import com.kprotasov.test.data.model.media.BaseMediaModel
 
 data class NewRecipeModel(
@@ -19,7 +20,7 @@ data class NewRecipeModel(
     val reposts: RepostsModel? = null,
     val views: ViewsModel? = null,
     @SerializedName("post_type") val postType: String? = null,
-    val attachments: List<BaseMediaModel>? = null,
+    val attachments: List<BaseAttachmentModel>? = null,
     @SerializedName("marked_as_ads") val makeAsAds: Int? = null,
     val donut: DonutModel? = null
 )

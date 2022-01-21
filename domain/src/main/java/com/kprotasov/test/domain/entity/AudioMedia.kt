@@ -2,7 +2,7 @@ package com.kprotasov.test.domain.entity
 
 import java.util.*
 
-data class Audio(
+data class AudioMedia(
     val id: Int,
     val ownerId: Int,
     val artist: String? = null,
@@ -10,4 +10,4 @@ data class Audio(
     val duration: Int,
     val url: String,
     val date: Date
-) : BaseMedia()
+) : BaseMedia(MediaTypes.TYPE_AUDIO)

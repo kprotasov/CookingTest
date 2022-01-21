@@ -1,4 +1,4 @@
-package com.kprotasov.test.cooking.di
+package com.kprotasov.test.cooking.di.ui
 
 import androidx.lifecycle.ViewModel
 import com.kprotasov.test.cooking.ui.extensions.args

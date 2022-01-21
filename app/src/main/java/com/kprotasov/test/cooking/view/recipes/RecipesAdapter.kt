@@ -1,11 +1,14 @@
 package com.kprotasov.test.cooking.view.recipes
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.kprotasov.test.cooking.R
-import com.kprotasov.test.domain.entity.Recipe
+import com.kprotasov.test.domain.entity.MediaTypes
+import com.kprotasov.test.domain.entity.NewRecipe
+import com.kprotasov.test.domain.entity.PhotoMedia
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.recipe_item.view.*
 import javax.inject.Inject
@@ -14,7 +17,7 @@ class RecipesAdapter @Inject constructor() : RecyclerView.Adapter<RecipesViewHol
 
     private var onRecipeItemClickListener: OnRecipeItemClickListener? = null
 
-    private var recipesList = mutableListOf<Recipe>()
+    private var recipesList = mutableListOf<NewRecipe>()
 
     fun setOnRecipeItemClickListener(listener: OnRecipeItemClickListener) {
         onRecipeItemClickListener = listener
@@ -31,7 +34,7 @@ class RecipesAdapter @Inject constructor() : RecyclerView.Adapter<RecipesViewHol
         holder.bind(recipesList[position], onRecipeItemClickListener)
     }
 
-    fun setRecipesList(recipesList: List<Recipe>) {
+    fun setRecipesList(recipesList: List<NewRecipe>) {
         this.recipesList.clear()
         this.recipesList.addAll(recipesList)
         notifyDataSetChanged()
@@ -41,14 +44,35 @@ class RecipesAdapter @Inject constructor() : RecyclerView.Adapter<RecipesViewHol
 
 class RecipesViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
-    fun bind(recipe: Recipe, onRecipeItemClickListener: OnRecipeItemClickListener?) {
-        view.recipeTitle.text = recipe.name
-        Picasso.get()
-            .load(recipe.images.first())
-            .placeholder(R.drawable.image_placeholder)
-            .into(view.recipeImage)
+    fun bind(recipe: NewRecipe, onRecipeItemClickListener: OnRecipeItemClickListener?) {
+        view.recipeTitle.text = recipe.text
+        Log.v("RecipesAdapterTest", "attachment ${recipe.attachments?.map { it.type }}")
+        val photoAttachmentList = recipe.attachments?.filter { it.type == MediaTypes.TYPE_PHOTO }
+        if (photoAttachmentList?.isNotEmpty() == true) {
+            photoAttachmentList.let {
+                if (photoAttachmentList.size == 1) {
+                    val photoAttachment = it[0] as PhotoMedia
+                    photoAttachment.sizes?.get(0)?.let { photoSize ->
+                        view.recipeMediaContainer.setImages(listOf(photoSize.url))
+                    }
+                } else {
+                    val urls = mutableListOf<String>()
+                    val photoAttachment = it[0] as PhotoMedia
+                    photoAttachment.sizes?.get(0)?.let { photoSize ->
+                        urls.add(photoSize.url)
+                    }
+                    val photoAttachment2 = it[1] as PhotoMedia
+                    photoAttachment2.sizes?.get(1)?.let { photoSize ->
+                        urls.add(photoSize.url)
+                    }
 
-        val difficultyNames = view.context.resources.getStringArray(R.array.difficulty_names)
+                    view.recipeMediaContainer.setImages(urls)
+                }
+            }
+        }
+
+
+        /*val difficultyNames = view.context.resources.getStringArray(R.array.difficulty_names)
         val difficultyText: String = if (recipe.difficulty <= difficultyNames.size) {
             difficultyNames[recipe.difficulty - 1]
         } else {
@@ -60,7 +84,7 @@ class RecipesViewHolder(private val view: View) : RecyclerView.ViewHolder(view) 
 
         view.setOnClickListener {
             onRecipeItemClickListener?.onRecipeItemClicked(recipe)
-        }
+        }*/
     }
 
 }
