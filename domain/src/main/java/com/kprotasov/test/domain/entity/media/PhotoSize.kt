@@ -1,4 +1,4 @@
-package com.kprotasov.test.domain.entity
+package com.kprotasov.test.domain.entity.media
 
 data class PhotoSize(
     val type: String,

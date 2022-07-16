@@ -3,10 +3,12 @@ package com.kprotasov.test.cooking.di
 import com.kprotasov.test.data.converters.*
 import com.kprotasov.test.data.model.*
 import com.kprotasov.test.data.model.media.BaseAttachmentModel
-import com.kprotasov.test.data.model.media.BaseMediaModel
 import com.kprotasov.test.data.model.media.photo.PhotoSizeModel
 import com.kprotasov.test.data.model.media.video.ImageModel
 import com.kprotasov.test.domain.entity.*
+import com.kprotasov.test.domain.entity.media.BaseMedia
+import com.kprotasov.test.domain.entity.media.Image
+import com.kprotasov.test.domain.entity.media.PhotoSize
 import dagger.Module
 import dagger.Provides
 import java.util.*

@@ -1,7 +1,6 @@
 package com.kprotasov.test.data.converters
 
 import com.kprotasov.test.data.model.NewRecipeModel
-import com.kprotasov.test.domain.entity.BaseMedia
 import com.kprotasov.test.domain.entity.NewRecipe
 import javax.inject.Inject
 

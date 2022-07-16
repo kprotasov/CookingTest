@@ -1,5 +1,6 @@
-package com.kprotasov.test.domain.entity
+package com.kprotasov.test.domain.entity.media
 
+import com.kprotasov.test.domain.entity.MediaTypes
 import java.util.*
 
 data class VideoMedia(
@@ -16,4 +17,4 @@ data class VideoMedia(
     val comments: Int,
     val canComment: Boolean,
     val canLike: Boolean
-): BaseMedia(MediaTypes.TYPE_VIDEO)
+): BaseMedia(MediaTypes.TYPE_VIDEO), ViewableMedia

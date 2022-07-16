@@ -1,5 +1,7 @@
 package com.kprotasov.test.domain.entity
 
+import com.kprotasov.test.domain.entity.media.BaseMedia
+
 data class NewRecipe(
     val id: Int,
     val ownerId: Int? = null,

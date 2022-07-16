@@ -1,5 +1,6 @@
-package com.kprotasov.test.domain.entity
+package com.kprotasov.test.domain.entity.media
 
+import com.kprotasov.test.domain.entity.MediaTypes
 import java.util.*
 
 data class AudioMedia(

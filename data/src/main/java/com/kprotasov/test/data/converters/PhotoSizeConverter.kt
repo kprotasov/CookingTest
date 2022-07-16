@@ -1,7 +1,7 @@
 package com.kprotasov.test.data.converters
 
 import com.kprotasov.test.data.model.media.photo.PhotoSizeModel
-import com.kprotasov.test.domain.entity.PhotoSize
+import com.kprotasov.test.domain.entity.media.PhotoSize
 import javax.inject.Inject
 
 class PhotoSizeConverter @Inject constructor(): Converter<PhotoSizeModel, PhotoSize> {

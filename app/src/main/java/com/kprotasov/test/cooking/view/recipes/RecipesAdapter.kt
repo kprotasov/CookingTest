@@ -8,8 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kprotasov.test.cooking.R
 import com.kprotasov.test.domain.entity.MediaTypes
 import com.kprotasov.test.domain.entity.NewRecipe
-import com.kprotasov.test.domain.entity.PhotoMedia
-import com.squareup.picasso.Picasso
+import com.kprotasov.test.domain.entity.media.PhotoMedia
 import kotlinx.android.synthetic.main.recipe_item.view.*
 import javax.inject.Inject
 
@@ -53,7 +52,7 @@ class RecipesViewHolder(private val view: View) : RecyclerView.ViewHolder(view) 
                 if (photoAttachmentList.size == 1) {
                     val photoAttachment = it[0] as PhotoMedia
                     photoAttachment.sizes?.get(0)?.let { photoSize ->
-                        view.recipeMediaContainer.setImages(listOf(photoSize.url))
+                        view.recipeMediaContainer.setMedia(listOf(photoSize.url))
                     }
                 } else {
                     val urls = mutableListOf<String>()
@@ -66,7 +65,7 @@ class RecipesViewHolder(private val view: View) : RecyclerView.ViewHolder(view) 
                         urls.add(photoSize.url)
                     }
 
-                    view.recipeMediaContainer.setImages(urls)
+                    view.recipeMediaContainer.setMedia(urls)
                 }
             }
         }

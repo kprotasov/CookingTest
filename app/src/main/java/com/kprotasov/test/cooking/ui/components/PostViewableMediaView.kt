@@ -7,18 +7,18 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
-import androidx.core.view.updateLayoutParams
 import com.kprotasov.test.cooking.R
+import com.kprotasov.test.domain.entity.media.ViewableMedia
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.recipe_item.view.*
 
-class PostImagesView @JvmOverloads constructor(
+class PostViewableMediaView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ): ConstraintLayout(context, attrs, defStyleAttr) {
 
-    fun setImages(imageList: List<String>) {
+    fun setMedia(imageList: List<ViewableMedia>) {
         val size = imageList.size
         if (size == 1) {
             val imageView = createImageView()

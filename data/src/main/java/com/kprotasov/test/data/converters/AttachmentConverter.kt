@@ -2,9 +2,11 @@ package com.kprotasov.test.data.converters
 
 import android.util.Log
 import com.kprotasov.test.data.model.media.BaseAttachmentModel
-import com.kprotasov.test.data.model.media.BaseMediaModel
 import com.kprotasov.test.domain.entity.MediaTypes
-import com.kprotasov.test.domain.entity.*
+import com.kprotasov.test.domain.entity.media.AudioMedia
+import com.kprotasov.test.domain.entity.media.BaseMedia
+import com.kprotasov.test.domain.entity.media.PhotoMedia
+import com.kprotasov.test.domain.entity.media.VideoMedia
 import java.util.*
 import javax.inject.Inject
 

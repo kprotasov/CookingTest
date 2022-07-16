@@ -1,7 +1,7 @@
 package com.kprotasov.test.data.converters
 
 import com.kprotasov.test.data.model.media.video.ImageModel
-import com.kprotasov.test.domain.entity.Image
+import com.kprotasov.test.domain.entity.media.Image
 import javax.inject.Inject
 
 class ImageConverter @Inject constructor(): Converter<ImageModel, Image> {

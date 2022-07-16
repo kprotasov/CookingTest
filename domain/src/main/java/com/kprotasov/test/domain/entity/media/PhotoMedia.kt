@@ -1,5 +1,6 @@
-package com.kprotasov.test.domain.entity
+package com.kprotasov.test.domain.entity.media
 
+import com.kprotasov.test.domain.entity.MediaTypes
 import java.util.*
 
 data class PhotoMedia(
@@ -12,4 +13,4 @@ data class PhotoMedia(
     val sizes: List<PhotoSize>? = null,
     val width: Int? = null,
     val height: Int? = null
-) : BaseMedia(MediaTypes.TYPE_PHOTO)
+) : BaseMedia(MediaTypes.TYPE_PHOTO), ViewableMedia

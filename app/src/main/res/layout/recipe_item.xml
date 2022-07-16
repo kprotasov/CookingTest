@@ -14,7 +14,7 @@
         tools:text="Рецепт вкусного блюда"
         android:paddingBottom="@dimen/half_offset"/>
 
-    <com.kprotasov.test.cooking.ui.components.PostImagesView
+    <com.kprotasov.test.cooking.ui.components.PostViewableMediaView
         android:id="@+id/recipeMediaContainer"
         android:layout_width="match_parent"
         android:layout_height="@dimen/image_height"
